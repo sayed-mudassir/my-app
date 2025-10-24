@@ -17,16 +17,16 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
-          end: "+=800",
-          scrub: 1.5,
+          end: "+=500",
+          scrub: 1,
           pin: true,
         },
       })
 
       // Background video scale + blur effect
       tl.to(videoRef.current, {
-        scale: 1.3,
-        filter: "blur(15px)",
+        scale: 2.5,
+        filter: "blur(55px)",
         ease: "power2.inOut",
       })
 

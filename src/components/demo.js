@@ -1,50 +1,47 @@
 "use client";
+
 import { useEffect } from "react";
-import { animate, stagger, utils } from 'animejs';
+import anime from "animejs";
 
-export default function AnimatedGrid() {
+export default function LineDrawingAnimation() {
   useEffect(() => {
-    const squares = document.querySelectorAll(".square");
+    const paths = document.querySelectorAll(".line");
 
-    // Helper to get random number between min and max
-    const random = (min, max) => Math.floor(Math.random() * (max - min + 1)) + min;
-    const $squares = utils.$('.square');
-    function animateGrid() {
-  animate($squares, {
-    scale: [
-      { to: [0, 1.25] },
-      { to: 0 }
-    ],
-    boxShadow: [
-      { to: '0 0 1rem 0 currentColor' },
-      { to: '0 0 0rem 0 currentColor' }
-    ],
-    delay: stagger(100, {
-      grid: [11, 4],
-      from: utils.random(0, 11 * 4)
-    }),
-    onComplete: animateGrid
-  });
-}
+    // Set up initial stroke dash properties for drawing effect
+    paths.forEach((path) => {
+      const length = path.getTotalLength();
+      path.style.strokeDasharray = length;
+      path.style.strokeDashoffset = length;
+    });
 
-animateGrid();
+    // Animate stroke drawing
+    anime({
+      targets: ".line",
+      strokeDashoffset: [anime.setDashoffset, 0],
+      easing: "easeInOutSine",
+      duration: 2000,
+      delay: anime.stagger(200),
+      direction: "alternate",
+      loop: true,
+    });
   }, []);
 
   return (
-    <div className="flex flex-col gap-4 items-center justify-center w-full h-full bg-gradient-to-br from-gray-900 via-gray-800 to-black p-8">
-      {Array.from({ length: 4 }).map((_, rowIndex) => (
-        <div
-          key={rowIndex}
-          className="row flex justify-center gap-10 flex-wrap"
-        >
-          {Array.from({ length: 11 }).map((_, squareIndex) => (
-            <div
-              key={squareIndex}
-              className="square w-10 h-10 bg-gradient-to-r from-grey-500 to-purple-700 rounded-md shadow-md"
-            ></div>
-          ))}
-        </div>
-      ))}
+    <div className="flex justify-center items-center h-screen bg-black">
+      <svg
+        width="300"
+        height="300"
+        viewBox="0 0 100 100"
+        fill="none"
+        stroke="white"
+        strokeWidth="2"
+      >
+        <path className="line" d="M10 10 H90" />
+        <path className="line" d="M10 30 H90" />
+        <path className="line" d="M10 50 H90" />
+        <path className="line" d="M10 70 H90" />
+        <path className="line" d="M10 90 H90" />
+      </svg>
     </div>
   );
 }

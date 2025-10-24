@@ -17,7 +17,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProviderWrapper>
           <Nav />
-           <main className="pt-20 px-4 md:px-8"></main>
+           <main className="pt-2 px-1 md:px-5"></main>
           {children}
         </ThemeProviderWrapper>
       </body>

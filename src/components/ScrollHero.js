@@ -17,7 +17,7 @@ export default function HeroSection() {
         scrollTrigger: {
           trigger: heroRef.current,
           start: "top top",
-          end: "+=500",
+          end: "+=400",
           scrub: 1,
           pin: true,
         },
@@ -25,9 +25,10 @@ export default function HeroSection() {
 
       // Background video scale + blur effect
       tl.to(videoRef.current, {
-        scale: 2.5,
+        scale: 1.5,
         filter: "blur(55px)",
         ease: "power2.inOut",
+        rotateY : "20"
       })
 
       // Text animation (scale, rotate, fade)
@@ -35,7 +36,7 @@ export default function HeroSection() {
         textRef.current,
         {
           opacity: 0,
-          scale: 1.5,
+          scale: 2.5,
           rotateX: 45,
           y: -150,
           ease: "power2.inOut",
@@ -67,17 +68,17 @@ export default function HeroSection() {
       </video>
 
       {/* Overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/40 z-10" />
+      <div className="absolute inset-0 z-10" />
 
       {/* Text Content */}
       <div
         ref={textRef}
-        className="relative z-20 text-center text-white max-w-4xl px-4"
+        className="relative z-20 text-center max-w-4xl px-4"
       >
         <h1 className="text-6xl md:text-8xl font-extrabold mb-6 tracking-tight">
           Sculptrix Agency
         </h1>
-        <p className="text-xl md:text-2xl text-gray-300 leading-relaxed mb-6">
+        <p className="text-xl md:text-2xl leading-relaxed mb-6">
           Where imagination meets innovation.
         </p>
         <p className="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto">

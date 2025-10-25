@@ -1,57 +1,75 @@
-import { getServiceBySlug } from "@/lib/getServices";
-import ReactMarkdown from "react-markdown";
+import OnThisPage from "@/components/onthispage";
+import { getServiceBySlug, getAllServices } from "@/lib/getServices";
+
+import { unified } from "unified";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import rehypeStringify from "rehype-stringify";
+import rehypeSlug from "rehype-slug";
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
+import rehypePrettyCode from "rehype-pretty-code";
+import { transformerCopyButton } from "@rehype-pretty/transformers";
+import rehypeDocument from "rehype-document";
+import rehypeFormat from "rehype-format";
 
 export async function generateStaticParams() {
-  const { getAllServices } = await import("@/lib/getServices");
   const services = getAllServices();
   return services.map((service) => ({ slug: service.slug }));
 }
 
-export default function ServiceDetailPage({ params }) {
-  const service = getServiceBySlug(params.slug);
-  if (!service) return <div className="p-10">Service not found.</div>;
+export default async function ServiceDetailPage({ params }) {
+  const { slug } = params;
+  const service = getServiceBySlug(slug);
+
+  if (!service) return <p>Service not found!</p>;
+
+  // 🧩 Markdown → HTML Processing Pipeline
+  const processor = unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypeDocument, { title: service.title })
+    .use(rehypeFormat)
+    .use(rehypeSlug)
+    .use(rehypeAutolinkHeadings, {
+      behavior: "wrap",
+    })
+    .use(rehypePrettyCode, {
+      theme: "github-dark",
+      transformers: [
+        transformerCopyButton({
+          visibility: "always",
+          feedbackDuration: 3000,
+        }),
+      ],
+    })
+    .use(rehypeStringify);
+
+  const htmlContent = (await processor.process(service.content)).toString();
 
   return (
-    <article className="max-w-3xl mx-auto py-16 px-6">
+    <div className="max-w-6xl mx-auto p-4 md:px-8">
+      <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
+      <p className="text-base mb-2 border-l-4 border-gray-500 pl-4 italic max-w-xl">
+        &quot;{service.description || "Explore our specialized service in detail."}&quot;
+      </p>
+
+      <div className="flex gap-2">
+        <p className="text-sm text-gray-500 mb-4 italic">By {service.author}</p>
+        <p className="text-sm text-gray-500 mb-4">{service.date}</p>
+      </div>
+
       <img
         src={service.image}
         alt={service.title}
-        className="w-full h-64 object-cover rounded-xl mb-6"
+        className="w-2/3 h-2/3 object-cover mb-6 rounded-lg"
       />
-      <h1 className="text-4xl font-bold mb-4">{service.title}</h1>
-      <div className="text-sm mb-6">
-        <span>👨‍💻 {service.author}</span> • <span>📅 {service.date}</span>
-      </div>
 
-      {/* ✅ Wrap ReactMarkdown inside a styled div instead */}
-      <div className="prose prose-invert max-w-none">
-        <ReactMarkdown
-          components={{
-            h1: ({ node, ...props }) => (
-              <h1 className="text-3xl font-bold mt-6 mb-4" {...props} />
-            ),
-            h2: ({ node, ...props }) => (
-              <h2 className="text-2xl font-semibold mt-5 mb-3" {...props} />
-            ),
-            p: ({ node, ...props }) => (
-              <p className="text-gray-300 leading-relaxed mb-4" {...props} />
-            ),
-            a: ({ node, ...props }) => (
-              <a
-                className="text-blue-400 hover:text-blue-600 underline"
-                target="_blank"
-                rel="noopener noreferrer"
-                {...props}
-              />
-            ),
-            img: ({ node, ...props }) => (
-              <img className="rounded-lg my-6" {...props} />
-            ),
-          }}
-        >
-          {service.content}
-        </ReactMarkdown>
-      </div>
-    </article>
+      <div
+        dangerouslySetInnerHTML={{ __html: htmlContent }}
+        className="prose dark:prose-invert"
+      ></div>
+
+      <OnThisPage htmlContent={htmlContent} />
+    </div>
   );
 }

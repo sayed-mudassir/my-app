@@ -11,42 +11,41 @@ export default function HeroSection() {
   const textRef = useRef(null)
   const videoRef = useRef(null)
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: heroRef.current,
-          start: "top top",
-          end: "+=400",
-          scrub: 1,
-          pin: true,
-        },
-      })
+  // useEffect(() => {
+  //   const ctx = gsap.context(() => {
+  //     const tl = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: heroRef.current,
+  //         start: "top top",
+  //         end: "+=400",
+  //         scrub: 1,
+  //         pin: true,
+  //       },
+  //     })
 
-      // Background video scale + blur effect
-      tl.to(videoRef.current, {
-        scale: 1.5,
-        filter: "blur(55px)",
-        ease: "power2.inOut",
-        rotateY : "20"
-      })
+  //     // Background video scale + blur effect
+  //     tl.to(videoRef.current, {
+  //       scale: 1.5,
+  //       filter: "blur(55px)",
+  //       ease: "power2.inOut",
+  //       rotateY : "20"
+  //     })
 
-      // Text animation (scale, rotate, fade)
-      tl.to(
-        textRef.current,
-        {
-          opacity: 0,
-          scale: 2.5,
-          rotateX: 45,
-          y: -150,
-          ease: "power2.inOut",
-        },
-        "<"
-      )
-    }, heroRef)
+  //     // Text animation (scale, rotate, fade)
+  //     tl.to(
+  //       textRef.current,
+  //       {
+  //         opacity: 0,
+  //         rotate: 360,
+  //         scale: 1.5,
+  //         ease: "power2.inOut",
+  //       },
+  //       "<"
+  //     )
+  //   }, heroRef)
 
-    return () => ctx.revert()
-  }, [])
+  //   return () => ctx.revert()
+  // }, [])
 
   return (
     <section

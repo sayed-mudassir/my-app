@@ -40,7 +40,7 @@ export default function NavBar() {
           {/* Logo */}
           <Link
             href="/"
-            className="text-2xl font-extrabold tracking-wide text-white"
+            className="text-2xl font-extrabold tracking-wide"
           >
             Sculptrix<span className="text-purple-400">.</span>
           </Link>
@@ -55,10 +55,10 @@ export default function NavBar() {
               >
                 <Link
                   href={link.href}
-                  className="relative text-gray-200 hover:text-white transition group"
+                  className="relative hover:text-underline-700 transition group"
                 >
                   {link.name}
-                  <span className="absolute left-0 bottom-0 w-0 h-[2px] bg-purple-400 transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute left-0 bottom-0 w-0 h-[2px] transition-all duration-300 group-hover:w-full" />
                 </Link>
               </motion.div>
             ))}
@@ -73,14 +73,14 @@ export default function NavBar() {
       </motion.nav>
 
       {/* ======= Bottom Mobile Navbar ======= */}
-      <div className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[90%] rounded-2xl backdrop-blur-xl bg-white/10 dark:bg-black/40 border border-white/20 shadow-lg flex justify-around items-center py-3 z-50">
+      <div className="md:hidden fixed bottom-3 left-1/2 -translate-x-1/2 w-[90%] rounded-2xl backdrop-blur-xl border border-white/20 shadow-lg flex justify-around items-center py-3 z-50">
         {navLinks.map((link) => {
           const Icon = link.icon
           return (
             <Link
               key={link.name}
               href={link.href}
-              className="flex flex-col items-center text-gray-300 hover:text-purple-400 transition-all duration-300"
+              className="flex flex-col items-center hover:text-purple-400 transition-all duration-300"
             >
               <Icon size={22} />
               <span className="text-xs mt-1">{link.name}</span>

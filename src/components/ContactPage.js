@@ -70,7 +70,7 @@ export default function ContactPage() {
         <h1 className="text-6xl md:text-7xl font-extrabold leading-tight tracking-tight">
           Contact <span className="text-blue-900">Sculptrix Agency</span>
         </h1>
-        <p className="text-2xl text-gray-200 max-w-xl">
+        <p className="text-2xl max-w-xl">
           Reach out directly via form, email, phone, or our socials below. We’re always ready to collaborate and create something amazing! 🚀
         </p>
 
@@ -109,7 +109,7 @@ export default function ContactPage() {
 
       {/* Right: Contact Form */}
       <motion.div
-        className="md:w-1/2 bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-12 shadow-2xl relative"
+        className="md:w-1/2 backdrop-blur-lg border rounded-4xl p-12 shadow-2xl relative"
         initial={{ opacity: 0, x: 50 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{ duration: 0.8 }}
@@ -122,7 +122,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0 }}
-              className="absolute inset-0 flex flex-col items-center justify-center bg-black/70 backdrop-blur-md text-center rounded-3xl"
+              className="absolute inset-0 flex flex-col items-center justify-center backdrop-blur-md text-center rounded-3xl"
             >
               <p className="text-3xl font-extrabold text-green-400 animate-pulse">
                 🎉 Sent Successfully!
@@ -141,7 +141,7 @@ export default function ContactPage() {
               value={formData.user_email}
               onChange={handleChange}
               required
-              className="mt-2 bg-gray-900/80 border-gray-700 text-white placeholder-gray-300 text-lg"
+              className="mt-2 border-gray-700 placeholder-gray-300 text-lg"
               placeholder="Your email"
             />
           </div>
@@ -155,7 +155,7 @@ export default function ContactPage() {
               value={formData.user_phone}
               onChange={handleChange}
               required
-              className="mt-2 bg-gray-900/80 border-gray-700 text-white placeholder-gray-300 text-lg"
+              className="mt-2 border-gray-700 placeholder-gray-300 text-lg"
               placeholder="Your phone number"
             />
           </div>
@@ -168,7 +168,7 @@ export default function ContactPage() {
               value={formData.message}
               onChange={handleChange}
               required
-              className="mt-2 bg-gray-900/80 border-gray-700 text-white placeholder-gray-300 text-lg"
+              className="mt-2 border-gray-700 placeholder-gray-300 text-lg"
               placeholder="Write your message..."
             />
           </div>

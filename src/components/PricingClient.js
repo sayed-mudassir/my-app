@@ -9,6 +9,15 @@ import { CheckCircle, Star, Zap, Rocket } from "lucide-react"
 export default function PricingClient({ packages }) {
   const icons = [Star, Zap, Rocket] // rotate icons for each package
 
+  if (!Array.isArray(packages) || packages.length === 0) {
+  return (
+    <section className="min-h-screen flex items-center justify-center">
+      <p className="text-gray-500 text-lg">No pricing packages available.</p>
+    </section>
+  )
+}
+
+
   return (
     <section className="min-h-screen w-full py-20 px-6 md:px-16">
       {/* Section Title */}

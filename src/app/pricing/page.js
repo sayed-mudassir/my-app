@@ -1,4 +1,3 @@
-// app/pricing/page.js
 import { getPricingPackages } from "@/lib/getPricingPackages"
 import PricingClient from "@/components/PricingClient"
 
@@ -7,8 +6,12 @@ export const metadata = {
   description: "Explore our flexible pricing packages designed to help your brand grow.",
 }
 
-export default function PricingPage() {
-  const packages = getPricingPackages()
+// ✅ Make this an async Server Component
+export default async function PricingPage() {
+  const packages = await getPricingPackages()
 
-  return <PricingClient packages={packages} />
+  // ✅ Sort by numeric value before sending to client
+  const sortedPackages = packages.sort((a, b) => a.priceValue - b.priceValue)
+
+  return <PricingClient packages={sortedPackages} />
 }

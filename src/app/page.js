@@ -6,7 +6,7 @@ import { getAllServices } from "@/lib/getServices";
 import ThreeAnimeScene from "@/components/ThreeAnimeScene";
 import Testimonials from "@/components/Testimonials";
 import HeroSection from "@/components/HeroSection"
-
+import ContactPage from "@/components/ContactPage";
 
 export const metadata = {
   title: "Services | Sculptrix Agency",
@@ -27,6 +27,7 @@ export default function Home() {
         <ThreeAnimeScene/>*/}
     <Services services={services} />
     <Testimonials/>
+    <ContactPage />
     </main>
   );
 }

@@ -54,7 +54,7 @@ export default function ExpertiseSection() {
         </motion.div>
 
         {/* Expertise Cards */}
-        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-20">
+        <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 mt-2">
           {expertiseData.map((item, index) => {
             const Icon = item.icon;
             return (

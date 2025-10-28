@@ -30,7 +30,7 @@ export default function PricingClient({ packages }) {
         <h1 className="text-5xl md:text-6xl font-extrabold tracking-tight mb-4 bg-gradient-to-r from-indigo-600 to-purple-600 bg-clip-text">
           Our Pricing Plans
         </h1>
-        <p className="text-lg md:text-xl text-gray-600">
+        <p className="text-lg md:text-xl">
           Scalable, transparent, and built for your business growth 🚀
         </p>
       </motion.div>

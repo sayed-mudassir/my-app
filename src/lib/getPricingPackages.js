@@ -1,10 +1,11 @@
+// src/lib/getPricingPackages.js
 import fs from "fs"
 import path from "path"
 import matter from "gray-matter"
 
 const pricingDir = path.join(process.cwd(), "content/pricing")
 
-export async function getPricingPackages() {
+export function getPricingPackages() {
   if (!fs.existsSync(pricingDir)) return [] // safety check
 
   const files = fs.readdirSync(pricingDir).filter((file) => file.endsWith(".md"))
@@ -14,8 +15,7 @@ export async function getPricingPackages() {
     const fileContent = fs.readFileSync(filePath, "utf-8")
     const { data } = matter(fileContent)
 
-    // Extract numeric value for price sorting (like ₹9,999 → 9999)
-    const numericPrice = Number(data.price.replace(/[^0-9.]/g, "")) || 0
+    const numericPrice = Number(data.price?.replace(/[^0-9.]/g, "")) || 0
 
     return {
       slug: filename.replace(".md", ""),
@@ -25,4 +25,22 @@ export async function getPricingPackages() {
   })
 
   return Array.isArray(packages) ? packages : []
+}
+
+export function getPricingPackage(slug) {
+  const filePath = path.join(pricingDir, `${slug}.md`)
+
+  if (!fs.existsSync(filePath)) {
+    console.warn(`⚠️ Missing pricing file for slug: ${slug}`)
+    return null
+  }
+
+  const fileContent = fs.readFileSync(filePath, "utf-8")
+  const { data, content } = matter(fileContent)
+
+  return {
+    slug,
+    content,
+    ...data,
+  }
 }

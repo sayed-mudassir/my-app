@@ -68,7 +68,7 @@ export default function ContactPage() {
         transition={{ duration: 0.8 }}
       >
         <h1 className="text-6xl md:text-7xl font-extrabold leading-tight tracking-tight">
-          Contact <span className="text-blue-900">Sculptrix Agency</span>
+          Contact <span className="text-purple-900">Sculptrix Agency</span>
         </h1>
         <p className="text-2xl max-w-xl">
           Reach out directly via form, email, phone, or our socials below. We’re always ready to collaborate and create something amazing! 🚀
@@ -173,7 +173,7 @@ export default function ContactPage() {
             />
           </div>
 
-          <Button type="submit" className="w-full text-xl font-bold py-4 bg-yellow-400 text-black hover:bg-yellow-500 transition-all">
+          <Button type="submit" className="w-full text-xl font-bold py-4 text-black hover:bg-indigo-400 transition-all">
             {status === "sending" ? "Sending..." : "Send Message"}
           </Button>
         </form>

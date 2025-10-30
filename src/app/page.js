@@ -11,6 +11,7 @@ import { getPricingPackages } from "@/lib/getPricingPackages"
 import PricingClient from "@/components/PricingClient"
 import ExpertiseSection from "@/components/ExpertiseSection"
 import WhyChooseUs from "@/components/WhyChooseUs"
+import SmoothScrollWrapper from "@/components/SmoothScrollWrapper"
 
 export const metadata = {
   title: "Services | Sculptrix Agency",
@@ -28,14 +29,19 @@ export default async function Home() {
   return (
     <main>
     
-    <ScrollHero/>
+    
+    <HeroSection/>
     <ExpertiseSection/>
     <WhyChooseUs/>
-    {/*<HeroSection/>
+    {/*<ScrollHero/>
+
       <Demo/>
-        <ThreeAnimeScene/>*/}
-    <Services services={services} />
+        <ThreeAnimeScene/>
+        <Services services={services} />
     <PricingClient packages={sortedPackages} />
+    
+    */}
+
     <Testimonials/>
     <ContactPage />
     </main>

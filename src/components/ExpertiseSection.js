@@ -30,7 +30,7 @@ export default function ExpertiseSection() {
       initial={{ opacity: 0, y: 80, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.9, ease: "easeOut" }}
-      className="py-28"
+      className="py-28 relative"
     >
       <div className="max-w-7xl mx-auto px-8 text-center space-y-8">
         <motion.div

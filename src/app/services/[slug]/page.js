@@ -1,4 +1,4 @@
-import OnThisPage from "@/components/onthispage";
+import OnThisPage from "@/components/onthispage"
 import { getServiceBySlug, getAllServices } from "@/lib/getServices";
 
 import { unified } from "unified";

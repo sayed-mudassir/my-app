@@ -30,7 +30,7 @@ export default function NavBar() {
         initial={{ y: -80, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.2, ease: "easeOut" }}
-        className={`fixed z-50 left-1/2 -translate-x-1/2 transition-all ${
+        className={`fixed z-50 left-1/2 -translate-x-1/2 z-60 transition-all ${
         scrolled
           ? "top-1 w-[90%] rounded-4xl backdrop-blur-xl bg-white/20 dark:bg-black/30 border border-white/20 shadow-lg"
           : "top-0 w-full border-b border-white/20 backdrop-blur-md bg-white/10 dark:bg-black/20"
